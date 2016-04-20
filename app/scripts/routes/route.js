@@ -78,6 +78,7 @@ App.Routers = App.Routers || {};
             App.g.payMode = result.Data.FlatInfo.PayMode;
             App.g.venderInterface = result.Data.FlatInfo.VenderInterface;
             
+            
             switch(App.g.payMode){
               case 0://前付费
                 switch(App.g.venderInterface){
