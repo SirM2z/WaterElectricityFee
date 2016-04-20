@@ -1,8 +1,421 @@
 body {
-    background: #fafafa;
+  background: #f8f8f8;
+  font-family: "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
 }
 
 .hero-unit {
-    margin: 50px auto 0 auto;
-    width: 300px;
+  margin: 50px auto 0 auto;
+  width: 300px;
+}
+
+/*覆盖样式*/
+.ui-btn-primary {
+  background-color: #228feb;
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0.5,#228feb),to(#228feb));
+  color: #fff;
+  background-clip: padding-box;
+}
+.ui-btn-primary:active{
+  background:#2272eb;
+}
+
+/*头部样式*/
+.ui-header{
+	background-color: #228feb;
+	z-index: 1;
+}
+.ui-header .ui-personal {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  margin-top: -23px;
+  font-size: 14px;
+}
+
+/*公用样式*/
+.hide {
+  display: none;
+}
+section:not(.no){
+  margin-top: 45px;
+}
+section.animated{
+  -webkit-animation-duration: .3s;
+  animation-duration: .3s;
+}
+.fright{
+  float: right;
+}
+.fleft{
+  float: left;
+}
+.btn-div{
+  padding: 0 15px;
+  margin-bottom: 10px;
+}
+.ui-btn-big {
+  border: 1px solid #228feb;
+  border-radius: 5px;
+  padding: 8px 0;
+  font-size: 14px;
+  color: #fff;
+  background-color: #228feb;
+  display: block;
+  width: 100%;
+  font-size: 16px;
+}
+
+
+/*idnex页样式*/
+#index .pay-heade,
+#afterIndex .pay-heade{
+  background-color: #228feb;
+  padding: 15px;
+  color: #fff;
+}
+#index .pay-text,
+#afterIndex .pay-text{
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+#index .pay-num,
+#afterIndex .pay-num{
+  font-size: 3.5em;
+  font-weight: bolder;
+  color: #fff;
+  height: 46px;
+  line-height: 46px;
+}
+#index .white-border,
+#afterIndex .white-border,
+#afterNoPay .white-border{
+  height: 1px;
+  width: 100%;
+  margin: 15px 0;
+  background-color: #7ABCF3;
+}
+#index .enable-num,
+#afterIndex .enable-num{
+  color: #7ABCF3;
+  font-size: 12px;
+  line-height: 12px;
+  height: 12px;
+}
+#index .ui-icon-set,
+#afterIndex .ui-icon-set{
+  position: absolute;
+  right: 10px;
+  top: 0;
+  line-height: 45px;
+  font-size: 25px;
+  color: #fff;
+}
+#index .ui-border-tb,
+#afterIndex .ui-border-tb{
+  height: 32px;
+  background-color: #fff;
+  padding: 5px 15px;
+  margin: 15px 0;
+}
+#index .history-text,
+#afterIndex .history-text{
+  color: #6B6B6B;
+  line-height: 32px;
+}
+#index .ui-btn-self,
+#afterIndex .ui-btn-self,
+#afterNoPay .ui-btn-self{
+  margin-top: 4px;
+  border: 1px solid #228feb;
+  border-radius: 5px;
+  padding: 0px 10px;
+  font-size: 14px;
+  color: #228feb;
+}
+#index .pay-panel,#beforePayNoFactory .pay-panel{
+  margin-bottom: 15px;
+}
+#index .pay-select,#beforePayNoFactory .pay-select{
+  height: 60px;
+  background-color: #fff;
+  padding: 0px 15px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+#index .ui-btn-select,#beforePayNoFactory .ui-btn-select{
+  border: 1px solid #AEAEAE;
+  border-radius: 5px;
+  padding: 1px 10px;
+  font-size: 14px;
+  color: #AEAEAE;
+  height: 28px;
+  line-height: 28px;
+}
+#index .ui-btn-select.active,#beforePayNoFactory .ui-btn-select.active{
+  border: 1px solid #228feb;
+  border-radius: 5px;
+  padding: 1px 10px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #228feb;
+}
+#index .pay-select div,#beforePayNoFactory .pay-select div{
+  box-flex: 1;
+  -webkit-box-flex: 1;
+  -ms-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-flex: 1;
+  margin: 0 10px;
+  text-align: center;
+  overflow: hidden;
+}
+#index .ui-form-item,
+#afterIndex .ui-form-item {
+  padding: 0 15px;
+}
+#index .ui-form-item input,
+#afterIndex .ui-form-item input {
+  padding-left: 50px;
+}
+#index .ui-form-item .ui-icon-close,
+#afterIndex .ui-form-item .ui-icon-close {
+  right: 5px;
+}
+#index .ui-tips span,#beforePayNoFactory .ui-tips span{
+  vertical-align: top;
+}
+
+/*roombind页样式*/
+#roomBind .ui-form-item .ui-select,#beforePayNoFactory .ui-form-item .ui-select{
+  margin-left: 65px;
+}
+#roomBind .ui-form-item input,#beforePayNoFactory .ui-form-item input{
+  padding-left: 65px;
+}
+#roomBind .ui-form,#beforePayNoFactory .ui-form{
+  margin-bottom: 15px;
+}
+
+/*history页样式*/
+#history .history-option {
+  background-color: #f5f5f9;
+  padding: 10px 20px;
+  font-size: 14px;
+}
+#history .history-choose{
+  display: box;
+  display: -webkit-box;
+  display: -ms-box;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-flex;
+  color: #2b8feb;
+  border-radius: 6px;
+  border: 1px solid #2b8feb;
+  overflow: hidden;
+}
+#history .history-choose div{
+  box-flex: 1;
+  -webkit-box-flex: 1;
+  -ms-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-flex: 1;
+  text-align: center;
+  padding: 3px 0;
+}
+#history .history-choose div.history-active{
+  background-color: #2b8feb;
+  color: #fff;
+}
+#history .no-bill-message,
+#beforePayNoFactoryHistory .no-bill-message,
+#afterNoPay .no-bill-message {
+  font-size: 14px;
+  padding-top: 30%;
+  text-align: center;
+  background: #f8f8f8;
+  color: #888;
+}
+#history .no-bill-message i,
+#beforePayNoFactoryHistory .no-bill-message i,
+#afterNoPay .no-bill-message i {
+  font-size: 80px;
+  height: 80px;
+}
+#history ul li,
+#beforePayNoFactoryHistory ul li,
+#afterNoPay ul li {
+  margin-left: 0;
+  padding-left: 15px;
+}
+#history .pay-list-fr,
+#beforePayNoFactoryHistory .pay-list-fr,
+#afterNoPay .pay-list-fr{
+  margin-right: 20px;
+  float: right;
+}
+
+/*historyDetail页样式*/
+#historyDetail .detail-panel,#paymentList .detail-panel,
+#beforePayNoFactoryHistoryDetail .detail-panel {
+  background-color: #fff;
+  padding-top: 15px;
+  margin-bottom: 15px;
+}
+#historyDetail .detail-panel .detail-message,
+#paymentList .detail-panel .detail-message,
+#beforePayNoFactoryHistoryDetail .detail-panel .detail-message {
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+#historyDetail .detail-panel .detail-number,
+#paymentList .detail-panel .detail-number,
+#beforePayNoFactoryHistoryDetail .detail-panel .detail-number {
+  font-size: 2.5em;
+  font-weight: 500;
+  color: #F60;
+  height: 46px;
+  line-height: 46px;
+  text-align: center;
+}
+#historyDetail .detail-panel .detail-tip,
+#paymentList .detail-panel .detail-tip,
+#beforePayNoFactoryHistoryDetail .detail-panel .detail-tip {
+  text-align: center;
+  font-size: 14px;
+  padding: 10px 0 10px 0;
+  color: #888;
+}
+#historyDetail .detail-panel-detail,
+#beforePayNoFactoryHistoryDetail .detail-panel-detail {
+  background-color: #fff;
+  padding-top: 15px;
+  margin-bottom: 15px;
+}
+#historyDetail .detail-panel-detail,
+#beforePayNoFactoryHistoryDetail .detail-panel-detail {
+  padding: 10px 15px;
+  font-size: 14px;
+  height: auto;
+}
+#historyDetail .detail-panel-detail tr td,
+#paymentList .section-pay-list th,
+#paymentList .section-pay-list td,
+#beforePayNoFactoryHistoryDetail .detail-panel-detail tr td,
+#afterIndex .section-pay-list th,
+#afterIndex .section-pay-list td {
+  padding: 5px 0;
+}
+#historyDetail .detail-panel-detail tr .detail-tr,
+#beforePayNoFactoryHistoryDetail .detail-panel-detail tr .detail-tr {
+  text-align: right;
+}
+
+/*paymentList页样式*/
+#paymentList .section-pay-list,
+#afterIndex .section-pay-list {
+  margin: 15px 0;
+  background-color: #fff;
+  font-size: 14px;
+}
+
+/*afterIndex页样式*/
+#afterIndex .pay-heade .pay-num{
+  position: relative;
+}
+#afterIndex .pay-heade .pay-num span{
+  font-size: 18px;
+  position: absolute;
+  right: 0;
+  bottom: -14px;
+}
+#afterIndex .pay-panel{
+  margin-bottom: 15px;
+}
+#afterIndex .ui-table{
+  margin: 0;
+}
+
+/*afterNoPay页样式*/
+#afterNoPay .classroom-info {
+  background-color: #228feb;
+  color: #fff;
+  padding: 20px 5px 0 5px;
+  position: relative;
+}
+#afterNoPay .classroom-info .classroom-school {
+  height: 40px;
+  line-height: 40px;
+  font-size: 1.2em;
+}
+#afterNoPay .classroom-info .classroom-school i {
+  float: left;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 40px;
+  width: 33px;
+  line-height: 38px;
+}
+#afterNoPay .classroom-info .classroom-address {
+  clear: both;
+  padding-left: 15px;
+  font-size: 14px;
+}
+#afterNoPay .classroom-info .ui-icon-set {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    line-height: 45px;
+    font-size: 25px;
+    color: #fff;
+}
+#afterNoPay .roommate-info {
+    background-color: #228feb;
+    padding: 8px 15px 0 15px;
+}
+
+#afterNoPay .roommate-info div {
+    padding: 8px 0;
+    overflow: hidden;
+}
+#afterNoPay .ui-border-t {
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.4)));
+}
+#afterNoPay .roommate-info div img {
+    width: 36px;
+    border-radius: 20px;
+    float: left;
+}
+#afterNoPay .history-div {
+    height: 32px;
+    background-color: #fff;
+    padding: 5px 15px;
+    margin: 10px 0;
+}
+#afterNoPay .history-div .history-tip {
+    float: left;
+    color: #888;
+    line-height: 30px;
+    font-size: 14px;
+}
+#afterNoPay .history-div .history-a {
+    margin-top: 4px;
+    float: right;
+    border-color: #228feb;
+}
+#afterNoPay .white-border {
+    margin-bottom: 0;
 }

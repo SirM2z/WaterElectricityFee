@@ -1,6 +1,6 @@
 'use strict';
-var LIVERELOAD_PORT = 35729;
-var SERVER_PORT = 9000;
+var LIVERELOAD_PORT = 35726;
+var SERVER_PORT = 9003;
 var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
 var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
@@ -79,7 +79,7 @@ module.exports = function (grunt) {
       },
       test: {
         options: {
-          port: 9001,
+          port: 9004,
           middleware: function (connect) {
             return [
               mountFolder(connect, 'test'),

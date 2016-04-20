@@ -2,7 +2,7 @@
 <html class="no-js" lang="">
   <head>
     <meta charset="utf-8">
-    <title>App</title>
+    <title>生活缴费</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -28,18 +28,42 @@
     <![endif]-->
     <div class="ui-loading-block hide" id="loading">
       <div class="ui-loading-cnt">
-          <i class="ui-loading-bright"></i>
-          <p>正在加载中...</p>
+        <i class="ui-loading-bright"></i>
+        <p>正在加载中...</p>
       </div>
     </div>
     
     <header class="ui-header ui-header-positive ui-border-b fadeIn animated">
-        <i class="ui-icon-return" onclick="history.back()"></i><h1></h1><div class="ui-personal"><a href="#bind"><i class="iconfont icon-cc-head-o"></i></a></div>
+      <i class="ui-icon-return" onclick="history.back()"></i><h1></h1>
+      <div class="ui-personal"><a href="#beforePayNoFactoryHistory">历史充电</a></div>
     </header>
     
-    <section id="login" class="fadeIn animated hide">
+    <section id="index" class="fadeIn animated hide no">
     </section>
     
+    <section id="roomBind" class="fadeIn animated hide">
+    </section>
+    
+    <section id="history" class="fadeIn animated hide">
+    </section>
+    
+    <section id="historyDetail" class="fadeIn animated hide">
+    </section>
+    
+    <section id="paymentList" class="fadeIn animated hide">
+    </section>
+    
+    <section id="beforePayNoFactory" class="fadeIn animated hide">
+    </section>
+    
+    <section id="beforePayNoFactoryHistory" class="fadeIn animated hide">
+    </section>
+    
+    <section id="afterIndex" class="fadeIn animated hide no">
+    </section>
+    
+    <section id="afterNoPay" class="fadeIn animated hide no">
+    </section>
 
 
     <!-- build:js scripts/vendor.js -->
@@ -54,6 +78,16 @@
     <script src="scripts/main.js"></script>
     <script src="scripts/templates.js"></script>
     <script src="scripts/routes/route.js"></script>
+    <script src="scripts/views/index.js"></script>
+    <script src="scripts/views/roomBind.js"></script>
+    <script src="scripts/views/history.js"></script>
+    <script src="scripts/views/historyDetail.js"></script>
+    <script src="scripts/views/paymentList.js"></script>
+    <script src="scripts/views/beforePayNoFactory.js"></script>
+    <script src="scripts/views/beforePayNoFactoryHistory.js"></script>
+    <script src="scripts/views/afterIndex.js"></script>
+    <script src="scripts/views/afterNoPay.js"></script>
+    <script src="scripts/models/userFlatModel.js"></script>
     <!-- endbuild -->
 </body>
 </html>

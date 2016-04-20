@@ -10,7 +10,14 @@ window.App = {
   Views: {},
   Routers: {},
   g:{
-    
+    openId:null,  //微信id
+    universityId:null,  //学校id
+    studentIdentity:null,  //universityId+'_'+openId
+    accessToken:null,  //accessToken
+    headImage:null, //headImage头像
+    userFlatModel:null, //App.Models.UserFlatModel
+    payMode:null, //支付方式
+    venderInterface:null, //厂商接口
   },
   loading: function loading(status) {
     if (status) {
