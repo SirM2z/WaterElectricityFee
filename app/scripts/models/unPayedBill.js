@@ -5,21 +5,23 @@ App.Models = App.Models || {};
 (function () {
   'use strict';
 
-  App.Models.UserFlatModel = Backbone.Model.extend({
+  App.Models.UnPayedBill = Backbone.Model.extend({
 
-    url: App.URL.USERFLAT,
+    url: '',
 
     initialize: function() {
     },
 
     defaults: {
-      StudentIdentity: '',
-      RoomId: '',
-      FlatId: '',
-      FlatName:'',
-      AreaId:'',
-      AreaName:'',
-      UserName: ''
+        Id:0,
+        TotalAmount:0,
+        RemainingAmount:0,
+        BillType:'',
+        ExpireDate:'',
+        BillPeroid:'',
+        Payments:[],
+        BStatus:'',
+        Details:[]
     },
 
     validate: function(attrs, options) {

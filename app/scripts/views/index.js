@@ -18,16 +18,26 @@ App.Views = App.Views || {};
       'click .charge-btn':'paySure',
       'click .ui-icon-close':'clearInput'
     },
+    
+    balanceAmount:null,
+    
+    balanceMeterReading:null,
 
     initialize: function () {
       //this.listenTo(this.model, 'change', this.render);
       this.$el.off();
       
+      this.balanceAmount=App.g.balanceAmount;
+      this.balanceMeterReading=App.g.balanceMeterReading;
+      
       this.render();
     },
 
     render: function () {
-      this.$el.html(this.template());
+      this.$el.html(this.template({
+        balanceAmount:this.balanceAmount,
+        balanceMeterReading:this.balanceMeterReading
+      }));
     },
     
     paySelect: function(event){

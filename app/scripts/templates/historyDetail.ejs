@@ -1,14 +1,14 @@
 <div id="billdetaildom">
   <div class="detail-panel ui-border-b">
     <div class="detail-message">充缴金额</div>
-    <div class="detail-number">0.01</div>
-    <div class="detail-tip">水电费充值</div>
+    <div class="detail-number"><%=detailinfo.Amount/100%></div>
+    <div class="detail-tip"><%=detailinfo.ItemDescription%></div>
   </div>
   <div class="detail-panel-detail ui-border-tb">
     <table width="100%">
-      <tbody><tr><td>房间</td><td class="detail-tr">七点层式－1号楼－666</td></tr>
-      <tr><td width="56">充值时间</td><td class="detail-tr">2016/9/17 17:49:51</td></tr>
-      <tr><td>充值人</td><td class="detail-tr">大蜀黍</td></tr>
-    </tbody></table>
+      <tr><td>房间</td><td class="detail-tr"><%=detailinfo.AdditionalData%></td></tr>
+      <tr><td width="56">充值时间</td><td class="detail-tr"><%=detailinfo.CreatedOn.replace('T',' ')%></td></tr>
+      <tr><td>充值人</td><td class="detail-tr"><%=detailinfo.CreatedBy%></td></tr>
+    </table>
   </div>
 </div>

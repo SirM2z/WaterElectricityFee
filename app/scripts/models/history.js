@@ -5,21 +5,19 @@ App.Models = App.Models || {};
 (function () {
   'use strict';
 
-  App.Models.UserFlatModel = Backbone.Model.extend({
+  App.Models.History = Backbone.Model.extend({
 
-    url: App.URL.USERFLAT,
+    url: '',
 
     initialize: function() {
     },
 
     defaults: {
-      StudentIdentity: '',
-      RoomId: '',
-      FlatId: '',
-      FlatName:'',
-      AreaId:'',
-      AreaName:'',
-      UserName: ''
+      OrderNo: '',
+      CreatedBy: '',
+      Amount: '',
+      CreatedOn:'',
+      StatusValue:''
     },
 
     validate: function(attrs, options) {

@@ -12,9 +12,15 @@ App.Views = App.Views || {};
     tagName: 'div',
     
     el:'#roomBind',
+    
+    userFlatModel:null,
+    
+    flatList:null,
 
     events: {
       'click .ui-icon-close':'clearInput',
+      'change .livearealist-select':'liveSelect',
+      'change .ban-select':'banSelect',
       'click .room-btn':'sureRoom'
     },
 
@@ -22,11 +28,39 @@ App.Views = App.Views || {};
       // this.listenTo(this.model, 'change', this.render);
       this.$el.off();
       
+      this.userFlatModel = App.g.userFlatModel.toJSON();
+      this.flatList = App.g.flatList.toJSON();
+      
       this.render();
     },
 
     render: function () {
-      this.$el.html(this.template());
+      this.$el.html(this.template({
+        userFlatModel:this.userFlatModel,
+        flatList:this.flatList
+      }));
+    },
+    
+    liveSelect:function(event){
+      //$('#test option:selected').val();
+      var optionSelected=$(event.target.options[event.target.options.selectedIndex]);
+      App.g.areaId=optionSelected.val();
+      App.g.areaName=optionSelected.text();
+      var ban_select=$('.ban-select');
+      ban_select.empty();
+      ban_select.append('<option value="0" selected >请选择楼栋</option>')
+      var flats=App.g.flatList.where({AreaId:App.g.areaId})[0].attributes.Flats;
+      for(var i=0;i<flats.length;i++){
+        ban_select.append('<option value="'+flats[i].FlatId+'" data-paymode="'+flats[i].PayMode+'">'+flats[i].FlatName+'</option>');
+      }
+    },
+    
+    banSelect: function(event){
+      var optionSelected=$(event.target.options[event.target.options.selectedIndex]);
+      $('#room').val('');
+      App.g.flatId=optionSelected.val();
+      App.g.flatName=optionSelected.text();
+      App.g.payMode=optionSelected.data('paymode');
     },
     
     clearInput: function(){
@@ -64,8 +98,45 @@ App.Views = App.Views || {};
         return;
       }
       
-      //ajax
-      
+      //保存信息
+      App.loading(true);
+      App.g.userFlatModel.set({
+        FlatId: ban.val(),
+        RoomId: room.val().trim(),
+        StudentIdentity: App.g.studentIdentity,
+        UserName: ''
+      });
+      App.g.userFlatModel.save(null, {
+        success: function(model, response) {
+          // console.log(response);
+          if (response.Status === 'SUCCESS') {
+            var el=$.tips({
+              content:'保存成功',
+              stayTime:2000,
+              type:"success"
+            })
+            el.on("tips:hide",function(){
+              Backbone.history.stop();
+              window.history.pushState(null, null, '#index?'+App.g.openId+'&'+App.g.universityId);
+              Backbone.history.start();
+            })
+            App.loading();
+          }else{
+            var el=$.tips({
+              content:'服务器出错:' + response.Message,
+              stayTime:2000,
+              type:"warn"
+            })
+          }
+        },
+        error:function(){
+          var el=$.tips({
+            content:'服务器出错',
+            stayTime:2000,
+            type:"warn"
+          })
+        }
+      });
       
     }
 

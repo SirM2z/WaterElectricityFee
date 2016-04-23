@@ -1,8 +1,9 @@
+<% var item=unPayedBillList %>
 <div class="pay-heade">
-  <div class="pay-text">2016年4月 水电缴费(元)</div>
-  <div class="pay-num">999.00<span>未缴:100</span></div>
+  <div class="pay-text"><%=item.BillPeroid +' '+ item.BillType%>(元)</div>
+  <div class="pay-num" data-amount="<%=item.RemainingAmount%>" data-billId="<%=item.Id%>"><%=item.TotalAmount%><span>未缴：<%=item.RemainingAmount%></span></div>
   <div class="white-border"></div>
-  <div class="enable-num">七层点式 1号楼 666 截止日期:2016/4/31<span></span></div>
+  <div class="enable-num"><%=userFlatModel.AreaName+' '+userFlatModel.FlatName+' '+userFlatModel.RoomId + ' '%>截止日期:<%=item.ExpireDate%><span></span></div>
   <a class="ui-icon-set" href="#roomBind"></a>
 </div>
 
@@ -25,30 +26,17 @@
         </tr>
       </thead>
       <tbody>
+        <% var items = item.Details; %>
+        <% for(var i = 0; i < items.length; i++) { %>
         <tr>
-          <td>水(吨)</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>1.45</td>
-          <td>0</td>
+          <td><%=items[i].BillItem + '(' + items[i].Unit + ')' %></td>
+          <td><%=items[i].QStart%></td>
+          <td><%=items[i].QEnd%></td>
+          <td><%=items[i].Quantity %></td>
+          <td><%=items[i].UnitPrice%></td>
+          <td><%=items[i].Amount%></td>
         </tr>
-        <tr>
-          <td>水(吨)</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>1.45</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <td>水(吨)</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>1.45</td>
-          <td>0</td>
-        </tr>
+        <% } %>
       </tbody>
     </table>
   </div>

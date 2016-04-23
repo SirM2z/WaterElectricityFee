@@ -70,7 +70,7 @@ section.animated{
 /*idnex页样式*/
 #index .pay-heade,
 #afterIndex .pay-heade{
-  background-color: #228feb;
+  background-color: #2281eb;
   padding: 15px;
   color: #fff;
 }
@@ -338,16 +338,28 @@ section.animated{
   position: relative;
 }
 #afterIndex .pay-heade .pay-num span{
-  font-size: 18px;
+  font-size: 16px;
   position: absolute;
   right: 0;
   bottom: -14px;
+  font-weight: normal;
 }
 #afterIndex .pay-panel{
   margin-bottom: 15px;
 }
 #afterIndex .ui-table{
   margin: 0;
+}
+#afterIndex .pay-text {
+  font-size: 16px;
+}
+#afterIndex .pay-heade {
+  padding: 10px 15px;
+}
+#afterIndex .enable-num {
+  font-size: 14px;
+  line-height: 14px;
+  height: 14px;
 }
 
 /*afterNoPay页样式*/

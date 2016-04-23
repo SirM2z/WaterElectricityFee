@@ -1,8 +1,9 @@
 <div id="billHistoryDetailDom">
+  <% var Item=unPayedBillHistoryList %>
   <div class="detail-panel ui-border-b">
-    <div class="detail-message">未缴费</div>
-    <div class="detail-number">0.54</div>
-    <div class="detail-tip">2016年4月 七层点式 3号楼 666 水电缴费</div>
+    <div class="detail-message"><%=Item.BStatus%></div>
+    <div class="detail-number"><%=Item.TotalAmount%></div>
+    <div class="detail-tip"><%=Item.BillPeroid + ' ' + userFlatModel.AreaName+' '+userFlatModel.FlatName+' '+userFlatModel.RoomId + ' ' + Item.BillType%></div>
   </div>
   <div class="section-pay-list">
     <table class="ui-table ui-border-tb" style="width:100%;">
@@ -17,30 +18,18 @@
         </tr>
       </thead>
       <tbody>
+        
+        <% if(Item && Item.Details){var items = Item.Details; %>
+        <%for(var i = 0; i < items.length; i++) { %>
         <tr>
-          <td>水(吨)</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>1.45</td>
-          <td>0</td>
+          <td><%=items[i].BillItem + '(' + items[i].Unit + ')' %></td>
+          <td><%=items[i].QStart%></td>
+          <td><%=items[i].QEnd%></td>
+          <td><%=items[i].Quantity %></td>
+          <td><%=items[i].UnitPrice%></td>
+          <td><%=items[i].Amount%></td>
         </tr>
-        <tr>
-          <td>水(吨)</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>1.45</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <td>水(吨)</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>1.45</td>
-          <td>0</td>
-        </tr>
+        <%}}%>
       </tbody>
     </table>
     <br>
@@ -53,15 +42,21 @@
         </tr>
       </thead>
       <tbody>
+        
+        <%if(Item && Item.Payments){var total = 0;
+        for(var i = 0; i < Item.Payments.length; i++){
+        var item = Item.Payments[i];%>
         <tr>
-          <td>2016/9/15</td>
-          <td>大蜀黍</td>
-          <td>0.01</td>
+          <td><%=item.PayedDate%></td>
+          <td><%=item.PayedBy%></td>
+          <td><%=item.PayedAmount%></td>
         </tr>
+        <%total = total + item.PayedAmount;}%>
         <tr>
           <td colspan="2">总计</td>
-          <td>0.01</td>
+          <td><%=total%></td>
         </tr>
+        <%}%>
       </tbody>
     </table>
   </div>

@@ -12,8 +12,14 @@ App.Views = App.Views || {};
     tagName: 'div',
 
     el: '#beforePayNoFactory',
+    
+    userFlatModel:null,
+    
+    flatList:null,
 
     events: {
+      'change .livearealist-select':'liveSelect',
+      'change .ban-select':'banSelect',
       'click .ui-btn-select':'paySelect',
       'click .charge-btn':'paySure',
       'click .ui-icon-close':'clearInput'
@@ -23,11 +29,17 @@ App.Views = App.Views || {};
       //this.listenTo(this.model, 'change', this.render);
       this.$el.off();
       
+      this.userFlatModel = App.g.userFlatModel.toJSON();
+      this.flatList = App.g.flatList.toJSON();
+      
       this.render();
     },
 
     render: function () {
-      this.$el.html(this.template());
+      this.$el.html(this.template({
+        userFlatModel:this.userFlatModel,
+        flatList:this.flatList
+      }));
     },
     
     paySelect: function(event){
@@ -39,6 +51,28 @@ App.Views = App.Views || {};
       }else{
         $('.pay-other').addClass('hide')
       }
+    },
+    
+    liveSelect:function(event){
+      //$('#test option:selected').val();
+      var optionSelected=$(event.target.options[event.target.options.selectedIndex]);
+      App.g.areaId=optionSelected.val();
+      App.g.areaName=optionSelected.text();
+      var ban_select=$('.ban-select');
+      ban_select.empty();
+      ban_select.append('<option value="0" selected >请选择楼栋</option>')
+      var flats=App.g.flatList.where({AreaId:App.g.areaId})[0].attributes.Flats;
+      for(var i=0;i<flats.length;i++){
+        ban_select.append('<option value="'+flats[i].FlatId+'" data-paymode="'+flats[i].PayMode+'">'+flats[i].FlatName+'</option>');
+      }
+    },
+    
+    banSelect: function(event){
+      var optionSelected=$(event.target.options[event.target.options.selectedIndex]);
+      $('#room').val('');
+      App.g.flatId=optionSelected.val();
+      App.g.flatName=optionSelected.text();
+      App.g.payMode=optionSelected.data('paymode');
     },
     
     clearInput: function(event){

@@ -14,8 +14,8 @@ App.Routers = App.Routers || {};
       'afterNoPay': 'afterNoPay',
       'roomBind':'roomBind',
       'history': 'history',
-      'historyDetail':'historyDetail',
-      'paymentList':'paymentList',
+      'historyDetail/:id':'historyDetail',
+      'paymentList/:id':'paymentList',
       'beforePayNoFactoryHistory': 'beforePayNoFactoryHistory'
     },
     init: function(openId,universityId){
@@ -43,12 +43,12 @@ App.Routers = App.Routers || {};
             App.g.accessToken=result.access_token;
             App.g.headImage = result.headImg;
             
-            //判断学校付费方式
-            _selfthis.judgeMode();
+            //获取楼栋信息
+            _selfthis.getFlat();
             
           }else{
             $.tips({
-              content:'初始化失败，请稍后重试！',
+              content:'初始化失败，服务器出错！',
               stayTime:2000,
               type:"warn"
             });
@@ -65,6 +65,49 @@ App.Routers = App.Routers || {};
       });
     },
     
+    getFlat: function(){
+      var _selfthis=this;
+      $.ajax({
+        url: App.URL.FLAT + App.g.universityId,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function success(response) {
+          var result = JSON.parse(response);
+          if (result.Status === "SUCCESS") {
+            if (result.Message === 'NOTFOUND') {
+              $.tips({
+                content: '暂无楼栋信息，请稍后重试！',
+                stayTime: 2000,
+                type: "warn"
+              });
+              return;
+            }
+            App.g.flatList=new App.Collections.FlatList();
+            for(var i=0,ilen=result.Data.Areas.length;i<ilen;i++){
+              App.g.flatList.push(result.Data.Areas[i]);
+            }
+            //判断学校付费方式
+            _selfthis.judgeMode();
+          }else{
+            $.tips({
+              content:'初始化失败，服务器出错！',
+              stayTime:2000,
+              type:"warn"
+            });
+            App.loading();
+          }
+        }, error: function error() {
+          $.tips({
+            content: '获取楼栋信息失败，请重试！',
+            stayTime: 2000,
+            type: "warn"
+          });
+          //Backbone.history.navigate('#', {trigger: true});
+          App.loading();
+        }
+      });
+    },
+    
     judgeMode: function(){
       var _selfthis=this;
       $.ajax({
@@ -73,7 +116,11 @@ App.Routers = App.Routers || {};
         dataType: 'JSON',
         success: function success(response) {
           var result = JSON.parse(response);
-          if (result.Status == "SUCCESS") {
+          if (result.Status === "SUCCESS") {
+            if (result.Message === 'NOTFOUND') {
+              Backbone.history.navigate('#roomBind', {trigger: true});
+              return;
+            }
             App.g.userFlatModel = new App.Models.UserFlatModel(result.Data.FlatInfo);
             App.g.payMode = result.Data.FlatInfo.PayMode;
             App.g.venderInterface = result.Data.FlatInfo.VenderInterface;
@@ -89,6 +136,8 @@ App.Routers = App.Routers || {};
                     break;
 
                   case 3://有查询和支付接口
+                    App.g.balanceAmount=result.Data.BalanceAmount;
+                    App.g.balanceMeterReading=result.Data.BalanceMeterReading;
                     _selfthis.index();
                     break;
                   
@@ -98,10 +147,10 @@ App.Routers = App.Routers || {};
               case 1://后付费
                 switch(App.g.venderInterface){
                   case 1://有查询接口
-                    _selfthisafterNoPay
+                    _selfthis.afterNoPay();
                     break;
 
-                  case 2://有支付接口                                                    
+                  case 2://有支付接口                                         
                     break;
 
                   case 3://有查询和支付接口
@@ -113,17 +162,16 @@ App.Routers = App.Routers || {};
                 break;
               default:break;
             }
+            App.loading();
+          }else{
+            $.tips({
+              content: '获取缴费历史失败，服务器出错！',
+              stayTime: 2000,
+              type: "warn"
+            });
+            Backbone.history.navigate('#', {trigger: true});
+            App.loading();
           }
-          if (response.Message === 'NOTFOUND' && App.g.venderInterface !== 1 && App.g.venderInterface !== 2) {
-            Backbone.history.navigate('#roomBind', {trigger: true});
-          }
-          if(App.g.venderInterface !== 2) {
-            
-          }
-          if(App.g.venderInterface === 2){
-            
-          }
-          App.loading();
         }, error: function error() {
           $.tips({
             content: '获取支付方式失败，请重试！',
@@ -138,8 +186,8 @@ App.Routers = App.Routers || {};
     
     index: function(){
       $('.ui-header').addClass('hide');
-      new App.Views.Index();
-      this.hidesection();
+      var index = new App.Views.Index();
+      $('section').addClass('hide');
       $('#index').removeClass('hide')
     },
     
@@ -148,21 +196,21 @@ App.Routers = App.Routers || {};
       $('.ui-header h1').text('水电费充值');
       $('.ui-header .ui-personal').removeClass('hide');
       new App.Views.BeforePayNoFactory();
-      this.hidesection();
+      $('section').addClass('hide');
       $('#beforePayNoFactory').removeClass('hide')
     },
     
     afterIndex: function(){
       $('.ui-header').addClass('hide');
       new App.Views.AfterIndex();
-      this.hidesection();
+      $('section').addClass('hide');
       $('#afterIndex').removeClass('hide')
     },
     
     afterNoPay: function(){
       $('.ui-header').addClass('hide');
       new App.Views.AfterNoPay();
-      this.hidesection();
+      $('section').addClass('hide');
       $('#afterNoPay').removeClass('hide')
     },
     
@@ -171,7 +219,7 @@ App.Routers = App.Routers || {};
       $('.ui-header h1').text('寝室绑定');
       $('.ui-header .ui-personal').addClass('hide');
       new App.Views.RoomBind();
-      this.hidesection();
+      $('section').addClass('hide');
       $('#roomBind').removeClass('hide')
     },
     
@@ -180,16 +228,16 @@ App.Routers = App.Routers || {};
       $('.ui-header h1').text('充缴费历史');
       $('.ui-header .ui-personal').addClass('hide');
       new App.Views.History();
-      this.hidesection();
+      $('section').addClass('hide');
       $('#history').removeClass('hide')
     },
     
-    historyDetail: function(){
+    historyDetail: function(id){
       $('.ui-header').removeClass('hide');
       $('.ui-header h1').text('充缴费详情');
       $('.ui-header .ui-personal').addClass('hide');
-      new App.Views.HistoryDetail();
-      this.hidesection();
+      new App.Views.HistoryDetail(id);
+      $('section').addClass('hide');
       $('#historyDetail').removeClass('hide')
     },
     
@@ -198,21 +246,17 @@ App.Routers = App.Routers || {};
       $('.ui-header h1').text('充缴费历史');
       $('.ui-header .ui-personal').addClass('hide');
       new App.Views.BeforePayNoFactoryHistory();
-      this.hidesection();
+      $('section').addClass('hide');
       $('#beforePayNoFactoryHistory').removeClass('hide')
     },
     
-    paymentList: function(){
+    paymentList: function(id){
       $('.ui-header').removeClass('hide');
       $('.ui-header h1').text('详情');
       $('.ui-header .ui-personal').addClass('hide');
-      new App.Views.PaymentList();
-      this.hidesection();
-      $('#paymentList').removeClass('hide')
-    },
-    
-    hidesection: function(){
+      new App.Views.PaymentList(id);
       $('section').addClass('hide');
+      $('#paymentList').removeClass('hide')
     }
   });
 

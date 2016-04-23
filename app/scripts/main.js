@@ -18,6 +18,16 @@ window.App = {
     userFlatModel:null, //App.Models.UserFlatModel
     payMode:null, //支付方式
     venderInterface:null, //厂商接口
+    flatList:null,  //App.Collections.FlatList 学生所在学校楼栋列表
+    areaId:null,  //当前生活区id
+    areaName:null,  //当前生活区名称
+    flatId:null,  //当前楼栋id
+    flatName:null,  //当前楼栋名称
+    balanceAmount:null, //剩余金额
+    balanceMeterReading:null, //可用度数
+    historyList:null, //App.Collections.HistoryList 历史缴费列表
+    unPayedBillHistoryList:null, //App.Collections.UnPayedBillHistoryList 历史欠费列表
+    unPayedBillList:null, //App.Collections.UnPayedBillList 未缴费列表
   },
   loading: function loading(status) {
     if (status) {
