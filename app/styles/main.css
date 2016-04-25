@@ -69,18 +69,21 @@ section.animated{
 
 /*idnex页样式*/
 #index .pay-heade,
-#afterIndex .pay-heade{
+#afterIndex .pay-heade,
+#afterNoPay .pay-heade{
   background-color: #2281eb;
   padding: 15px;
   color: #fff;
 }
 #index .pay-text,
-#afterIndex .pay-text{
+#afterIndex .pay-text,
+#afterNoPay .pay-text{
   font-size: 18px;
   margin-bottom: 15px;
 }
 #index .pay-num,
-#afterIndex .pay-num{
+#afterIndex .pay-num,
+#afterNoPay .pay-num{
   font-size: 3.5em;
   font-weight: bolder;
   color: #fff;
@@ -89,6 +92,7 @@ section.animated{
 }
 #index .white-border,
 #afterIndex .white-border,
+#afterIndexNoBill .white-border,
 #afterNoPay .white-border{
   height: 1px;
   width: 100%;
@@ -96,7 +100,8 @@ section.animated{
   background-color: #7ABCF3;
 }
 #index .enable-num,
-#afterIndex .enable-num{
+#afterIndex .enable-num,
+#afterNoPay .enable-num{
   color: #7ABCF3;
   font-size: 12px;
   line-height: 12px;
@@ -125,7 +130,7 @@ section.animated{
 }
 #index .ui-btn-self,
 #afterIndex .ui-btn-self,
-#afterNoPay .ui-btn-self{
+#afterIndexNoBill .ui-btn-self{
   margin-top: 4px;
   border: 1px solid #228feb;
   border-radius: 5px;
@@ -198,14 +203,25 @@ section.animated{
 }
 
 /*roombind页样式*/
-#roomBind .ui-form-item .ui-select,#beforePayNoFactory .ui-form-item .ui-select{
+#roomBind .ui-form-item .ui-select,
+#beforePayNoFactory .ui-form-item .ui-select,
+#afterNoPay .ui-form-item .ui-select{
   margin-left: 65px;
 }
-#roomBind .ui-form-item input,#beforePayNoFactory .ui-form-item input{
+#roomBind .ui-form-item input,
+#beforePayNoFactory .ui-form-item input,
+#afterNoPay .ui-form-item input{
   padding-left: 65px;
 }
-#roomBind .ui-form,#beforePayNoFactory .ui-form{
+#roomBind .ui-form,
+#beforePayNoFactory .ui-form,
+#afterNoPay .ui-form,{
   margin-bottom: 15px;
+}
+
+/*beforePayNoFactory页样式*/
+#beforePayNoFactory .ui-form{
+  margin-bottom: 10px;
 }
 
 /*history页样式*/
@@ -242,7 +258,7 @@ section.animated{
 }
 #history .no-bill-message,
 #beforePayNoFactoryHistory .no-bill-message,
-#afterNoPay .no-bill-message {
+#afterIndexNoBill .no-bill-message {
   font-size: 14px;
   padding-top: 30%;
   text-align: center;
@@ -251,40 +267,37 @@ section.animated{
 }
 #history .no-bill-message i,
 #beforePayNoFactoryHistory .no-bill-message i,
-#afterNoPay .no-bill-message i {
+#afterIndexNoBill .no-bill-message i {
   font-size: 80px;
   height: 80px;
 }
 #history ul li,
 #beforePayNoFactoryHistory ul li,
-#afterNoPay ul li {
+#afterIndexNoBill ul li {
   margin-left: 0;
   padding-left: 15px;
 }
 #history .pay-list-fr,
 #beforePayNoFactoryHistory .pay-list-fr,
-#afterNoPay .pay-list-fr{
+#afterIndexNoBill .pay-list-fr{
   margin-right: 20px;
   float: right;
 }
 
 /*historyDetail页样式*/
-#historyDetail .detail-panel,#paymentList .detail-panel,
-#beforePayNoFactoryHistoryDetail .detail-panel {
+#historyDetail .detail-panel,#paymentList .detail-panel{
   background-color: #fff;
   padding-top: 15px;
   margin-bottom: 15px;
 }
 #historyDetail .detail-panel .detail-message,
-#paymentList .detail-panel .detail-message,
-#beforePayNoFactoryHistoryDetail .detail-panel .detail-message {
+#paymentList .detail-panel .detail-message {
   text-align: center;
   font-size: 14px;
   margin-bottom: 10px;
 }
 #historyDetail .detail-panel .detail-number,
-#paymentList .detail-panel .detail-number,
-#beforePayNoFactoryHistoryDetail .detail-panel .detail-number {
+#paymentList .detail-panel .detail-number {
   font-size: 2.5em;
   font-weight: 500;
   color: #F60;
@@ -293,21 +306,18 @@ section.animated{
   text-align: center;
 }
 #historyDetail .detail-panel .detail-tip,
-#paymentList .detail-panel .detail-tip,
-#beforePayNoFactoryHistoryDetail .detail-panel .detail-tip {
+#paymentList .detail-panel .detail-tip {
   text-align: center;
   font-size: 14px;
   padding: 10px 0 10px 0;
   color: #888;
 }
-#historyDetail .detail-panel-detail,
-#beforePayNoFactoryHistoryDetail .detail-panel-detail {
+#historyDetail .detail-panel-detail {
   background-color: #fff;
   padding-top: 15px;
   margin-bottom: 15px;
 }
-#historyDetail .detail-panel-detail,
-#beforePayNoFactoryHistoryDetail .detail-panel-detail {
+#historyDetail .detail-panel-detail {
   padding: 10px 15px;
   font-size: 14px;
   height: auto;
@@ -315,13 +325,11 @@ section.animated{
 #historyDetail .detail-panel-detail tr td,
 #paymentList .section-pay-list th,
 #paymentList .section-pay-list td,
-#beforePayNoFactoryHistoryDetail .detail-panel-detail tr td,
 #afterIndex .section-pay-list th,
 #afterIndex .section-pay-list td {
   padding: 5px 0;
 }
-#historyDetail .detail-panel-detail tr .detail-tr,
-#beforePayNoFactoryHistoryDetail .detail-panel-detail tr .detail-tr {
+#historyDetail .detail-panel-detail tr .detail-tr {
   text-align: right;
 }
 
@@ -334,10 +342,12 @@ section.animated{
 }
 
 /*afterIndex页样式*/
-#afterIndex .pay-heade .pay-num{
+#afterIndex .pay-heade .pay-num,
+#afterNoPay .pay-heade .pay-num{
   position: relative;
 }
-#afterIndex .pay-heade .pay-num span{
+#afterIndex .pay-heade .pay-num span,
+#afterNoPay .pay-heade .pay-num span{
   font-size: 16px;
   position: absolute;
   right: 0;
@@ -350,43 +360,46 @@ section.animated{
 #afterIndex .ui-table{
   margin: 0;
 }
-#afterIndex .pay-text {
+#afterIndex .pay-text,
+#afterNoPay .pay-text {
   font-size: 16px;
 }
-#afterIndex .pay-heade {
+#afterIndex .pay-heade,
+#afterNoPay .pay-heade {
   padding: 10px 15px;
 }
-#afterIndex .enable-num {
+#afterIndex .enable-num,
+#afterNoPay .enable-num {
   font-size: 14px;
   line-height: 14px;
   height: 14px;
 }
 
-/*afterNoPay页样式*/
-#afterNoPay .classroom-info {
+/*afterIndexNoBill页样式*/
+#afterIndexNoBill .classroom-info {
   background-color: #228feb;
   color: #fff;
   padding: 20px 5px 0 5px;
   position: relative;
 }
-#afterNoPay .classroom-info .classroom-school {
+#afterIndexNoBill .classroom-info .classroom-school {
   height: 40px;
   line-height: 40px;
   font-size: 1.2em;
 }
-#afterNoPay .classroom-info .classroom-school i {
+#afterIndexNoBill .classroom-info .classroom-school i {
   float: left;
   color: rgba(255, 255, 255, 0.4);
   font-size: 40px;
   width: 33px;
   line-height: 38px;
 }
-#afterNoPay .classroom-info .classroom-address {
+#afterIndexNoBill .classroom-info .classroom-address {
   clear: both;
   padding-left: 15px;
   font-size: 14px;
 }
-#afterNoPay .classroom-info .ui-icon-set {
+#afterIndexNoBill .classroom-info .ui-icon-set {
     position: absolute;
     right: 10px;
     top: 20px;
@@ -394,40 +407,55 @@ section.animated{
     font-size: 25px;
     color: #fff;
 }
-#afterNoPay .roommate-info {
+#afterIndexNoBill .roommate-info {
     background-color: #228feb;
     padding: 8px 15px 0 15px;
 }
 
-#afterNoPay .roommate-info div {
+#afterIndexNoBill .roommate-info div {
     padding: 8px 0;
     overflow: hidden;
 }
-#afterNoPay .ui-border-t {
+#afterIndexNoBill .ui-border-t {
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.4)));
 }
-#afterNoPay .roommate-info div img {
+#afterIndexNoBill .roommate-info div img {
     width: 36px;
     border-radius: 20px;
     float: left;
 }
-#afterNoPay .history-div {
+#afterIndexNoBill .history-div {
     height: 32px;
     background-color: #fff;
     padding: 5px 15px;
     margin: 10px 0;
 }
-#afterNoPay .history-div .history-tip {
+#afterIndexNoBill .history-div .history-tip {
     float: left;
     color: #888;
     line-height: 30px;
     font-size: 14px;
 }
-#afterNoPay .history-div .history-a {
+#afterIndexNoBill .history-div .history-a {
     margin-top: 4px;
     float: right;
     border-color: #228feb;
 }
-#afterNoPay .white-border {
+#afterIndexNoBill .white-border {
     margin-bottom: 0;
+}
+
+/*afterNoPay页样式*/
+#afterNoPay .pay-heade{
+  margin-bottom: 10px;
+}
+#afterNoPay .ui-form{
+  margin-bottom: 10px;
+}
+#afterNoPay .pay-num-text{
+  font-size: 2.5em;
+  font-weight: bolder;
+  color: #fff;
+  height: 46px;
+  line-height: 46px;
 }

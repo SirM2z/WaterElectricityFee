@@ -16,12 +16,16 @@ App.Views = App.Views || {};
     events: {
       'click .ui-btn-select':'paySelect',
       'click .charge-btn':'paySure',
-      'click .ui-icon-close':'clearInput'
+      'click .ui-icon-close':'clearInput',
+      'click .cancle':'canclePay',
+      'click .pay-confirm':'payConfirm'
     },
     
     balanceAmount:null,
     
     balanceMeterReading:null,
+    
+    chargeMoney:null,
 
     initialize: function () {
       //this.listenTo(this.model, 'change', this.render);
@@ -81,8 +85,116 @@ App.Views = App.Views || {};
       }
       
       //ajax
-      console.log(chargeMoney);
+      // console.log(chargeMoney);
+      this.chargeMoney=chargeMoney;
+      var str='您确定要为'+App.g.userFlatModel.get('AreaName')+'-'+App.g.userFlatModel.get('FlatName')+'-'+App.g.userFlatModel.get('RoomId')+'充值'+chargeMoney+'元电费吗？'
+      $('.ui-dialog-bd div').text(str);
+      $('.ui-dialog').dialog("show");
+    },
+    
+    canclePay: function(){
+      $('.ui-dialog').dialog("hide");
+    },
+    
+    payConfirm: function(){
+      var billId=0;
+      var payItem = '水电费充值: ';
+      var itemDesc = '水电费充值';
+      App.loading(true);
+      var _selfthis=this;
+      $.ajax({
+        url:App.URL.WPP,
+        data:{
+          Description: payItem + App.g.userFlatModel.get('AreaName') + '-' + App.g.userFlatModel.get('FlatName') + '-' + App.g.userFlatModel.get('RoomId'),
+					ItemDescription:itemDesc,
+					AttachData: App.g.userFlatModel.get('AreaId') + '-' + App.g.userFlatModel.get('FlatId') + '-' + App.g.userFlatModel.get('RoomId'),
+					OrderType:App.g.payMode === 0?'POWER':'POWERPOST',
+          TotalFee:_selfthis.chargeMoney*100,
+					BillId:billId,
+					HqbOpenId:App.g.hqbOpenId,
+					OpenId: App.g.openId,
+          UniversityId: App.g.universityId,
+          AccessToken: App.g.accessToken
+        },
+        type:'POST',
+        dataType:'JSON',
+        success:function(response){
+          var result = JSON.parse(response);
+          if(result.Status === "SUCCESS"){
+            App.g.orderNo=result.Data.OrderNo;
+            App.g.payParams=result.Data.PayParams;
+            //调用微信支付接口
+            _selfthis.weixinPay();
+          }else{
+            $.tips({
+              content:'服务器出错,请稍后重试！',
+              stayTime:2000,
+              type:"warn"
+            });
+            App.loading();
+          }
+        },error:function(){
+          $.tips({
+            content:'充值失败，请刷新重试！',
+            stayTime:3000,
+            type:"warn"
+          });
+          App.loading();
+        }
+      });
+    },
+    
+    weixinPay: function(){
+      if(!WeixinJSBridge){
+				return;
+			}
+      var params = JSON.parse(App.g.payParams);
+      var url = App.URL.ChangeOrder + App.g.orderNo;
+      WeixinJSBridge.invoke('getBrandWCPayRequest', {
+        'appId': params.appId, //公众号名称，由商户传入
+        'timeStamp': params.timeStamp, //时间戳，自1970年以来的秒数
+        'nonceStr': params.nonceStr, //随机串
+        'package': params.package,
+        'signType': 'MD5', //微信签名方式：
+        'paySign': params.paySign //微信签名
+      },function(res) {
+        if (res.err_msg === 'get_brand_wcpay_request:ok') {
+          $.ajax({
+            type:'POST',//此处如果用put方法会调用出错，返回status 0
+            url:url,
+            headers:{
+              'Authorization': 'bearer ' + App.g.accessToken
+            },
+            success:function() {
+              var dia = $.dialog({
+                title: '温馨提示',
+                content: '您已成功充值,充值金额将在半小时内到账，请耐心等待',
+                button: ['确认', '查看充值记录']
+              });
+              dia.on('dialog:action', function(e) {
+                Backbone.history.stop();
+                if(e.index === 1){
+                  window.history.pushState(null, null, '#history');
+                }else{
+                  window.history.pushState(null, null, '#index?'+App.g.openId+'&'+App.g.universityId);
+                }
+                Backbone.history.start();
+              });
+              dia.on('dialog:hide', function(e) {});
+            },
+            error:function(xhr, ajaxOptions, thrownError){
+              var content = '网络异常，请联系客服人员。';
+              var dia = $.dialog({
+                title: '温馨提示',
+                content:content,
+                button: ['确认']
+              });	
+            }
+          });	
+        }
+      },false);
     }
+      
 
   });
 

@@ -1,7 +1,7 @@
 <% var item=unPayedBillList %>
 <div class="pay-heade">
   <div class="pay-text"><%=item.BillPeroid +' '+ item.BillType%>(元)</div>
-  <div class="pay-num" data-amount="<%=item.RemainingAmount%>" data-billId="<%=item.Id%>"><%=item.TotalAmount%><span>未缴：<%=item.RemainingAmount%></span></div>
+  <div class="pay-num" data-amount="<%=item.RemainingAmount%>" data-billid="<%=item.Id%>"><%=item.TotalAmount%><span>未缴：<%=item.RemainingAmount%></span></div>
   <div class="white-border"></div>
   <div class="enable-num"><%=userFlatModel.AreaName+' '+userFlatModel.FlatName+' '+userFlatModel.RoomId + ' '%>截止日期:<%=item.ExpireDate%><span></span></div>
   <a class="ui-icon-set" href="#roomBind"></a>
@@ -54,4 +54,18 @@
 
 <div class="btn-div">
   <button class="ui-btn-big charge-btn">立即缴费</button>
+</div>
+
+
+<div class="ui-dialog">
+  <div class="ui-dialog-cnt">
+    <div class="ui-dialog-bd">
+      <h4>温馨提示</h4>
+      <div></div>
+    </div>
+    <div class="ui-dialog-ft">
+      <button type="button" class="cancle" data-role="button">取消</button>
+      <button type="button" class="pay-confirm" data-role="button">确定</button>
+    </div>
+  </div>        
 </div>

@@ -11,7 +11,9 @@ window.App = {
   Routers: {},
   g:{
     openId:null,  //微信id
+    hqbOpenId:null, //后勤宝id 暂无用 接口参数中的该值无需管
     universityId:null,  //学校id
+    universityName:null,  //学校名称
     studentIdentity:null,  //universityId+'_'+openId
     accessToken:null,  //accessToken
     headImage:null, //headImage头像
@@ -28,6 +30,8 @@ window.App = {
     historyList:null, //App.Collections.HistoryList 历史缴费列表
     unPayedBillHistoryList:null, //App.Collections.UnPayedBillHistoryList 历史欠费列表
     unPayedBillList:null, //App.Collections.UnPayedBillList 未缴费列表
+    orderNo:null, //订单编号
+    payParams:null, //支付参数
   },
   loading: function loading(status) {
     if (status) {

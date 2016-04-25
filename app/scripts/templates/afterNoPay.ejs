@@ -1,27 +1,64 @@
-<div class="classroom-info" id="classroomInfo">
-  <div class="classroom-school">
-    <i class="ui-icon-pin"></i>
-    西南交通大学
-  </div>
-  <div class="classroom-address">
-    新房（交大花园）片区 10号楼 666
-  </div>
+<% var item=unPayedBillList %>
+<% if(item){ %>
+<div class="pay-heade">
+  <div class="pay-text"><%=item.BillPeroid +' '+ item.BillType%>(元)</div>
+  <div class="pay-num" data-amount="<%=item.RemainingAmount%>" data-billid="<%=item.Id%>"><%=item.TotalAmount%><span>未缴：<%=item.RemainingAmount%></span></div>
   <div class="white-border"></div>
-  <br>
-  <a class="ui-icon-set" href="#roomBind"></a>
+  <div class="enable-num">截止日期:<%=item.ExpireDate%><span></span></div>
+</div>
+<% }else{ %>
+<div class="pay-heade">
+  <div class="pay-text">生活缴费</div>
+  <div class="pay-num-text" data-amount="" data-billid="">暂无欠费<span></span></div>
+  <div class="white-border"></div>
+  <div class="enable-num"><span></span></div>
+</div>
+<% } %>
+
+<div class="ui-form ui-border-t">
+  <div class="ui-form-item ui-border-b">
+    <label>生活区:</label>
+    <div class="ui-select">
+      <select class="livearealist-select">
+        <% if(!userFlatModel || !userFlatModel.AreaId){ %>
+        <option value="0" selected >请选择生活区</option>
+        <% } %>
+        <% for(var i=0,ilen=flatList.length;i<ilen;i++){ %>
+        <option value="<%= flatList[i].AreaId %>" 
+        <% if(userFlatModel && userFlatModel.AreaId && flatList[i].AreaId==userFlatModel.AreaId){ %> selected <% } %> >
+        <%= flatList[i].AreaName %>
+        </option>
+        <% } %>
+      </select>
+    </div>
+  </div>
+  <div class="ui-form-item ui-border-b">
+    <label>楼&nbsp;&nbsp; &nbsp;栋:</label>
+    <div class="ui-select">
+      <select class="ban-select">
+        <% if(!userFlatModel || !userFlatModel.FlatId){ %>
+        <option value="0" selected >请选择楼栋</option>
+        <% } %>
+        <% for(var i=0,ilen=flatList.length;i<ilen;i++){ %>
+        <% if(flatList[i].AreaId==userFlatModel.AreaId){ %>
+        <% for(var j=0,jlen=flatList[i].Flats.length;j<jlen;j++){ %>
+        <option value="<%= flatList[i].Flats[j].FlatId %>" data-paymode='<%= flatList[i].Flats[j].PayMode %>' 
+        <% if(userFlatModel && userFlatModel.FlatId && flatList[i].Flats[j].FlatId==userFlatModel.FlatId){ %> selected <% } %> >
+        <%= flatList[i].Flats[j].FlatName %>
+        </option>
+        <% } %>
+        <% } %>
+        <% } %>
+      </select>
+    </div>
+  </div>
+  <div class="ui-form-item ui-border-b">
+    <label>寝&nbsp;&nbsp; &nbsp;室:</label>
+    <input id="room" type="text" placeholder="请输入寝室号" value="<% if(userFlatModel && userFlatModel.RoomId){ %><%=userFlatModel.RoomId %><% } %>" >
+    <a href="#" class="ui-icon-close"></a>
+  </div>
 </div>
 
-<div class="ui-border-tb history-div">
-  <div class="history-tip">历史缴费</div>
-  <a class="ui-btn-self history-a" href="#beforePayNoFactoryHistory">查看</a>
+<div class="btn-div">
+  <button class="ui-btn-big detail-btn">立即查询</button>
 </div>
-
-<ul class="ui-list ui-list-pure ui-list-link ui-border-tb ">
-  <li class="ui-border-t" data-id="1">
-    <h4 class="pay-list-info">电费充值<span class="pay-list-fr">0.01</span></h4>
-    <p>七层点式 1号楼 666 <span class="pay-list-fr">2016年4月</span></p>
-  </li>
-</ul>
-
-
-<div class="no-bill-message hide"><i class="ui-icon-emo" style="color:#bbb"></i>暂未查询到欠费</div>

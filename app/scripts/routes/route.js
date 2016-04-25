@@ -11,6 +11,7 @@ App.Routers = App.Routers || {};
       'index': 'index',//&:hqbOpenId&:VenderInterface&:code&:state
       'beforePayNoFactory': 'beforePayNoFactory',
       'afterIndex': 'afterIndex',
+      'afterIndexNoBill': 'afterIndexNoBill',
       'afterNoPay': 'afterNoPay',
       'roomBind':'roomBind',
       'history': 'history',
@@ -39,6 +40,7 @@ App.Routers = App.Routers || {};
           if(result && result.access_token){
             App.g.openId=openId;
             App.g.universityId=universityId;
+            App.g.universityName=result.universityName;
             App.g.studentIdentity=universityId+'_'+openId;
             App.g.accessToken=result.access_token;
             App.g.headImage = result.headImg;
@@ -123,22 +125,22 @@ App.Routers = App.Routers || {};
             }
             App.g.userFlatModel = new App.Models.UserFlatModel(result.Data.FlatInfo);
             App.g.payMode = result.Data.FlatInfo.PayMode;
-            App.g.venderInterface = result.Data.FlatInfo.VenderInterface;
+            App.g.venderInterface = 3 || result.Data.FlatInfo.VenderInterface;
             
             switch(App.g.payMode){
               case 0://前付费
                 switch(App.g.venderInterface){
-                  case 1://有查询接口
+                  case 1://有查询接口 未做
                     break;
 
                   case 2://有支付接口
-                    _selfthis.beforePayNoFactory();
+                    Backbone.history.navigate('#beforePayNoFactory', {trigger: true});
                     break;
 
                   case 3://有查询和支付接口
                     App.g.balanceAmount=result.Data.BalanceAmount;
                     App.g.balanceMeterReading=result.Data.BalanceMeterReading;
-                    _selfthis.index();
+                    Backbone.history.navigate('#index', {trigger: true});
                     break;
                   
                   default:break;
@@ -147,14 +149,14 @@ App.Routers = App.Routers || {};
               case 1://后付费
                 switch(App.g.venderInterface){
                   case 1://有查询接口
-                    _selfthis.afterNoPay();
+                    Backbone.history.navigate('#afterNoPay', {trigger: true});
                     break;
 
-                  case 2://有支付接口                                         
+                  case 2://有支付接口 未做
                     break;
 
                   case 3://有查询和支付接口
-                    _selfthis.afterIndex();
+                    Backbone.history.navigate('#afterIndex', {trigger: true});
                     break;
 
                   default:break;
@@ -188,7 +190,7 @@ App.Routers = App.Routers || {};
       $('.ui-header').addClass('hide');
       var index = new App.Views.Index();
       $('section').addClass('hide');
-      $('#index').removeClass('hide')
+      $('#index').removeClass('hide');
     },
     
     beforePayNoFactory: function(){
@@ -197,21 +199,28 @@ App.Routers = App.Routers || {};
       $('.ui-header .ui-personal').removeClass('hide');
       new App.Views.BeforePayNoFactory();
       $('section').addClass('hide');
-      $('#beforePayNoFactory').removeClass('hide')
+      $('#beforePayNoFactory').removeClass('hide');
     },
     
     afterIndex: function(){
       $('.ui-header').addClass('hide');
       new App.Views.AfterIndex();
       $('section').addClass('hide');
-      $('#afterIndex').removeClass('hide')
+      $('#afterIndex').removeClass('hide');
+    },
+    
+    afterIndexNoBill: function(){
+      $('.ui-header').addClass('hide');
+      new App.Views.AfterIndexNoBill();
+      $('section').addClass('hide');
+      $('#afterIndexNoBill').removeClass('hide');
     },
     
     afterNoPay: function(){
       $('.ui-header').addClass('hide');
       new App.Views.AfterNoPay();
       $('section').addClass('hide');
-      $('#afterNoPay').removeClass('hide')
+      $('#afterNoPay').removeClass('hide');
     },
     
     roomBind: function(){
@@ -220,7 +229,7 @@ App.Routers = App.Routers || {};
       $('.ui-header .ui-personal').addClass('hide');
       new App.Views.RoomBind();
       $('section').addClass('hide');
-      $('#roomBind').removeClass('hide')
+      $('#roomBind').removeClass('hide');
     },
     
     history: function(){
@@ -229,7 +238,7 @@ App.Routers = App.Routers || {};
       $('.ui-header .ui-personal').addClass('hide');
       new App.Views.History();
       $('section').addClass('hide');
-      $('#history').removeClass('hide')
+      $('#history').removeClass('hide');
     },
     
     historyDetail: function(id){
@@ -238,7 +247,7 @@ App.Routers = App.Routers || {};
       $('.ui-header .ui-personal').addClass('hide');
       new App.Views.HistoryDetail(id);
       $('section').addClass('hide');
-      $('#historyDetail').removeClass('hide')
+      $('#historyDetail').removeClass('hide');
     },
     
     beforePayNoFactoryHistory: function(){
@@ -247,7 +256,7 @@ App.Routers = App.Routers || {};
       $('.ui-header .ui-personal').addClass('hide');
       new App.Views.BeforePayNoFactoryHistory();
       $('section').addClass('hide');
-      $('#beforePayNoFactoryHistory').removeClass('hide')
+      $('#beforePayNoFactoryHistory').removeClass('hide');
     },
     
     paymentList: function(id){
@@ -256,7 +265,7 @@ App.Routers = App.Routers || {};
       $('.ui-header .ui-personal').addClass('hide');
       new App.Views.PaymentList(id);
       $('section').addClass('hide');
-      $('#paymentList').removeClass('hide')
+      $('#paymentList').removeClass('hide');
     }
   });
 

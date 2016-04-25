@@ -101,7 +101,10 @@ App.Views = App.Views || {};
       //保存信息
       App.loading(true);
       App.g.userFlatModel.set({
+        AreaId: livearea.val(),
+        AreaName: $(livearea[0].options[livearea[0].selectedIndex]).text().trim(),
         FlatId: ban.val(),
+        FlatName: $(ban[0].options[ban[0].selectedIndex]).text().trim(),
         RoomId: room.val().trim(),
         StudentIdentity: App.g.studentIdentity,
         UserName: ''
