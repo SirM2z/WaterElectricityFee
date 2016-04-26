@@ -13,11 +13,19 @@ App.Models = App.Models || {};
     },
 
     defaults: {
-      OrderNo: '',
-      CreatedBy: '',
-      Amount: '',
+      AdditionalData:'',
+      Amount:'',
+      ClientId:'',
+      CreatedBy:'',
       CreatedOn:'',
-      StatusValue:''
+      ItemDescription:'',
+      OrderNo:'',
+      OrderType:'',
+      Status:'',
+      UpdatedBy:'',
+      UpdatedOn:'',
+      statusValue:'',
+      typeValue:'',
     },
 
     validate: function(attrs, options) {

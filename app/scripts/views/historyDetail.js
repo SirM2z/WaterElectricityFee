@@ -30,9 +30,12 @@ App.Views = App.Views || {};
         Backbone.history.navigate('#history', {trigger: true});
         return;
       }
-      this.detailinfo = _.find(App.g.historyList.models[0].attributes.list, function(detail) {
-        return detail.OrderNo === id;
-      });
+      // this.detailinfo = _.find(App.g.historyList.models[0].attributes.list, function(detail) {
+      //   return detail.OrderNo === id;
+      // });
+      if(App.g.liveAreaId && App.g.historyList.where({OrderNo:id}).length>0){
+        this.detailinfo=App.g.historyList.where({OrderNo:id})[0].attributes;
+      }
       this.render();
     },
 

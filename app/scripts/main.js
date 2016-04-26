@@ -32,6 +32,11 @@ window.App = {
     unPayedBillList:null, //App.Collections.UnPayedBillList 未缴费列表
     orderNo:null, //订单编号
     payParams:null, //支付参数
+    ajaxIng:false,  //是否在执行ajax 防止滑动加载调用多次ajax
+    pagesize:10,  //分页大小
+    beforePayNoFactoryHistoryEpage:1, //前支付无查询历史充值记录页码
+    unHistoryEpage:1, //历史欠费记录页码
+    historyEpage:1, //历史充值记录页码
   },
   loading: function loading(status) {
     if (status) {

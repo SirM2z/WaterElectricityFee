@@ -1,15 +1,19 @@
-<ul class="ui-list ui-list-pure ui-list-link ui-border-tb  <% if(historyList.length==0){ %>hide<% } %> ">
-  <% for(var i=0,ilen=historyList.length;i<ilen;i++){ %>
-  <% for(var j=0,jlen=historyList[i].list.length;j<jlen;j++){ 
-    var item = historyList[i].list[j] %>
-  <li class="ui-border-t" data-id="<%=item.OrderNo%>">
-    <h4 class="pay-list-info"><%=item.typeValue%><span class="pay-list-fr"><%=item.Amount/100%></span></h4>
-    <p><%=item.CreatedBy%><span class="pay-list-fr"><%=item.CreatedOn.replace('T',' ')%></span></p>
-  </li>
-  <% } %>
-  <% } %>
-</ul>
-
+<div id="wrapper" class="<% if(historyList.length===0){ %> hide <% } %> beforePayNoFactoryHistory-wrapper">
+  <div id="scroller">
+    
+    <ul class="ui-list ui-list-pure ui-list-link ui-border-tb  <% if(historyList.length==0){ %>hide<% } %> ">
+      <% for(var i=0,ilen=historyList.length;i<ilen;i++){ 
+        var item = historyList[i] %>
+      <li class="ui-border-t" data-id="<%=item.OrderNo%>">
+        <h4 class="pay-list-info"><%=item.typeValue%><span class="pay-list-fr"><%=item.Amount/100%></span></h4>
+        <p><%=item.CreatedBy%><span class="pay-list-fr"><%=item.CreatedOn.replace('T',' ')%></span></p>
+      </li>
+      <% } %>
+    </ul>
+    
+    <div id="more" class=""> <% if(isFinish){ %> 已无更多数据 <% }else{ %>上滑加载更多 <% } %> </div>
+  </div>
+</div>
 
 <div class="no-bill-message  <% if(historyList.length>0){ %>hide<% } %>">
   <i class="ui-icon-info" style="color:#bbb"></i>

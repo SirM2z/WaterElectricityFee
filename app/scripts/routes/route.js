@@ -14,10 +14,10 @@ App.Routers = App.Routers || {};
       'afterIndexNoBill': 'afterIndexNoBill',
       'afterNoPay': 'afterNoPay',
       'roomBind':'roomBind',
-      'history': 'history',
+      'history': 'history',//2
       'historyDetail/:id':'historyDetail',
       'paymentList/:id':'paymentList',
-      'beforePayNoFactoryHistory': 'beforePayNoFactoryHistory'
+      'beforePayNoFactoryHistory': 'beforePayNoFactoryHistory'//1
     },
     init: function(openId,universityId){
       console.log(openId);
@@ -134,13 +134,15 @@ App.Routers = App.Routers || {};
                     break;
 
                   case 2://有支付接口
-                    Backbone.history.navigate('#beforePayNoFactory', {trigger: true});
+                    // Backbone.history.navigate('#beforePayNoFactory', {trigger: true});
+                    _selfthis.beforePayNoFactory();
                     break;
 
                   case 3://有查询和支付接口
                     App.g.balanceAmount=result.Data.BalanceAmount;
                     App.g.balanceMeterReading=result.Data.BalanceMeterReading;
-                    Backbone.history.navigate('#index', {trigger: true});
+                    // Backbone.history.navigate('#index', {trigger: true});
+                    _selfthis.index();
                     break;
                   
                   default:break;
@@ -149,14 +151,16 @@ App.Routers = App.Routers || {};
               case 1://后付费
                 switch(App.g.venderInterface){
                   case 1://有查询接口
-                    Backbone.history.navigate('#afterNoPay', {trigger: true});
+                    // Backbone.history.navigate('#afterNoPay', {trigger: true});
+                    _selfthis.afterNoPay();
                     break;
 
                   case 2://有支付接口 未做
                     break;
 
                   case 3://有查询和支付接口
-                    Backbone.history.navigate('#afterIndex', {trigger: true});
+                    // Backbone.history.navigate('#afterIndex', {trigger: true});
+                    _selfthis.afterIndex();
                     break;
 
                   default:break;

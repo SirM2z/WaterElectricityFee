@@ -1,35 +1,80 @@
 <div class="history-option">
   <div class="history-choose">
-    <div class="div-1 history-active" id="ourbill">月缴清单</div>
-    <div class="div-2" id="mypayment">充缴历史</div>
+    <div class="div-1 
+    <% if(currentTabReply){ %> 
+    <% if(currentTabReply === 1){ %> history-active <% } %> 
+    <% }else{ %> history-active <% } %>
+    " id="ourbill">月缴清单</div>
+    <div class="div-2 
+    <% if(currentTabReply){ %> 
+    <% if(currentTabReply === 2){ %> history-active <% } %> 
+    <% } %>
+    " id="mypayment">充缴历史</div>
   </div>
 </div>
 
-<ul class="ui-list ui-list-pure ui-list-link ui-border-tb ul-1 <% if(unPayedBillHistoryList.length==0){ %>hide<% } %> ">
-  <% for(var i=0,ilen=unPayedBillHistoryList.length;i<ilen;i++){
-    var item = unPayedBillHistoryList[i] %>
-  <li class="ui-border-t" data-id="<%= item.Id %>">
-    <h4 class="pay-list-info"><%=item.BillType%><span class="pay-list-fr"><%=item.TotalAmount%></span></h4>
-    <p><%=userFlatModel.AreaName+' '+userFlatModel.FlatName+' '+userFlatModel.RoomId%> <span class="pay-list-fr"><%=item.BillPeroid%></span></p>
-  </li>
-  <% } %>
-</ul>
+<div id="wrapper-un" class="<% if(currentTabReply){ %> 
+<% if(currentTabReply === 1){ %>
+<% if(!unPayedBillHistoryList || unPayedBillHistoryList.length<=0){ %> hide <% } %> 
+<% }else{ %>
+hide
+<% } %>
+<% }else{ %>
+<% if(!unPayedBillHistoryList || unPayedBillHistoryList.length<=0){ %> hide <% } %> 
+<% } %>
+wrapper-un">
+  <div id="scroller-un">
 
-<ul class="ui-list ui-list-pure ui-list-link ui-border-tb ul-2 hide">
-  <% for(var i=0,ilen=historyList.length;i<ilen;i++){ %>
-  <% for(var j=0,jlen=historyList[i].list.length;j<jlen;j++){ 
-    var item = historyList[i].list[j] %>
-  <li class="ui-border-t" data-id="<%=item.OrderNo%>">
-    <h4 class="pay-list-info"><%=item.typeValue%><span class="pay-list-fr"><%=item.Amount/100%></span></h4>
-    <p><%=item.CreatedBy%><span class="pay-list-fr"><%=item.CreatedOn.replace('T',' ')%></span></p>
-  </li>
-  <% } %>
-  <% } %>
-</ul>
+    <ul class="ui-list ui-list-pure ui-list-link ui-border-tb ul-1">
+      <% for(var i=0,ilen=unPayedBillHistoryList.length;i<ilen;i++){
+        var item = unPayedBillHistoryList[i] %>
+      <li class="ui-border-t" data-id="<%= item.Id %>">
+        <h4 class="pay-list-info"><%=item.BillType%><span class="pay-list-fr"><%=item.TotalAmount%></span></h4>
+        <p><%=userFlatModel.AreaName+' '+userFlatModel.FlatName+' '+userFlatModel.RoomId%> <span class="pay-list-fr"><%=item.BillPeroid%></span></p>
+      </li>
+      <% } %>
+    </ul>
+  </div>
+</div>
+
+<div id="wrapper" class="<% if(currentTabReply){ %> 
+<% if(currentTabReply === 2){ %>
+<% if(!historyList || historyList.length<=0){ %> hide <% } %> 
+<% }else{ %>
+hide
+<% } %>
+<% }else{ %>
+hide
+<% } %> 
+wrapper">
+  <div id="scroller">
+  
+    <ul class="ui-list ui-list-pure ui-list-link ui-border-tb ul-2">
+      <% for(var i=0,ilen=historyList.length;i<ilen;i++){ 
+        var item = historyList[i] %>
+      <li class="ui-border-t" data-id="<%=item.OrderNo%>">
+        <h4 class="pay-list-info"><%=item.typeValue%><span class="pay-list-fr"><%=item.Amount/100%></span></h4>
+        <p><%=item.CreatedBy%><span class="pay-list-fr"><%=item.CreatedOn.replace('T',' ')%></span></p>
+      </li>
+      <% } %>
+    </ul>
+    
+    <div id="more" class=""> <% if(isFinishHistory){ %> 已无更多数据 <% }else{ %>上滑加载更多 <% } %> </div>  
+  </div>
+</div>
 
 
 
-<div class="no-bill-message <% if(unPayedBillHistoryList.length>0){ %>hide<% } %> ">
+<div class="no-bill-message
+<% if(currentTabReply){ %> 
+<% if(currentTabReply === 1){ %>
+<% if(unPayedBillHistoryList.length>0){ %> hide <% } %>
+<% }else{ %>
+<% if(historyList.length>0){ %> hide <% } %>
+<% } %>
+<% }else{ %>
+<% if(unPayedBillHistoryList.length>0){ %>hide<% } %>
+<% } %>  ">
   <i class="ui-icon-info" style="color:#bbb"></i>
   <span>暂未查询到缴费清单</span>
 </div>
