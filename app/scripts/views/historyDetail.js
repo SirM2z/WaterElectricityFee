@@ -33,7 +33,7 @@ App.Views = App.Views || {};
       // this.detailinfo = _.find(App.g.historyList.models[0].attributes.list, function(detail) {
       //   return detail.OrderNo === id;
       // });
-      if(App.g.liveAreaId && App.g.historyList.where({OrderNo:id}).length>0){
+      if(App.g.historyList && App.g.historyList.where({OrderNo:id}).length>0){
         this.detailinfo=App.g.historyList.where({OrderNo:id})[0].attributes;
       }
       this.render();

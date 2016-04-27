@@ -125,7 +125,7 @@ App.Routers = App.Routers || {};
             }
             App.g.userFlatModel = new App.Models.UserFlatModel(result.Data.FlatInfo);
             App.g.payMode = result.Data.FlatInfo.PayMode;
-            App.g.venderInterface = 3 || result.Data.FlatInfo.VenderInterface;
+            App.g.venderInterface = result.Data.FlatInfo.VenderInterface;
             
             switch(App.g.payMode){
               case 0://前付费
