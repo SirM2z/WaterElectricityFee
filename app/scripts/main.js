@@ -1,8 +1,9 @@
 /*global app, $*/
 
 //var APIServerHost= 'http://120.26.48.150:8089/';
-//var APIServerHost= 'http://pay.houqinbao.com:8089/';
-var APIServerHost= 'http://121.41.82.81:8090/';
+var APIServerHost= 'http://pay.houqinbao.com:8089/';
+//var APIServerHost ='http://localhost:9289/';
+//var APIServerHost= 'http://121.41.82.81:8090/';
 
 window.App = {
   Models: {},

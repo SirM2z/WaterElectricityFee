@@ -202,6 +202,161 @@ section.animated{
   vertical-align: top;
 }
 
+
+
+
+/*idnex页样式*/
+#indexsel .pay-heade,
+#afterIndex .pay-heade,
+#afterNoPay .pay-heade{
+  background-color: #2281eb;
+  padding: 15px;
+  color: #fff;
+}
+#indexsel .pay-text,
+#afterIndex .pay-text,
+#afterNoPay .pay-text{
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+#indexsel .pay-num,
+#afterIndex .pay-num,
+#afterNoPay .pay-num{
+  font-size: 3.5em;
+  font-weight: bolder;
+  color: #fff;
+  height: 46px;
+  line-height: 46px;
+}
+#indexsel .white-border,
+#afterIndex .white-border,
+#afterIndexNoBill .white-border,
+#afterNoPay .white-border{
+  height: 1px;
+  width: 100%;
+  margin: 15px 0;
+  background-color: #7ABCF3;
+}
+#indexsel .enable-num,
+#afterIndex .enable-num,
+#afterNoPay .enable-num{
+  color: #7ABCF3;
+  font-size: 12px;
+  line-height: 12px;
+  height: 12px;
+}
+
+
+#indexsel .enable-nums,
+#afterIndex .enable-nums,
+#afterNoPay .enable-nums{
+  color: #EDEEEF;
+  font-size: 19px;
+  line-height: 12px;
+  height: 12px;
+}
+
+
+
+#indexsel .ui-icon-set,
+#afterIndex .ui-icon-set{
+  position: absolute;
+  right: 10px;
+  top: 0;
+  line-height: 45px;
+  font-size: 25px;
+  color: #fff;
+}
+#indexsel .ui-border-tb,
+#afterIndex .ui-border-tb{
+  height: 32px;
+  background-color: #fff;
+  padding: 5px 15px;
+  margin: 15px 0;
+}
+#indexsel .history-text,
+#afterIndex .history-text{
+  color: #6B6B6B;
+  line-height: 32px;
+}
+#indexsel .ui-btn-self,
+#afterIndex .ui-btn-self,
+#afterIndexNoBill .ui-btn-self{
+  margin-top: 4px;
+  border: 1px solid #228feb;
+  border-radius: 5px;
+  padding: 0px 10px;
+  font-size: 14px;
+  color: #228feb;
+}
+#indexsel .pay-panel,#beforePayNoFactory .pay-panel{
+  margin-bottom: 15px;
+}
+#indexsel .pay-select,#beforePayNoFactory .pay-select{
+  height: 60px;
+  background-color: #fff;
+  padding: 0px 15px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+#indexsel .ui-btn-select,#beforePayNoFactory .ui-btn-select{
+  border: 1px solid #AEAEAE;
+  border-radius: 5px;
+  padding: 1px 10px;
+  font-size: 14px;
+  color: #AEAEAE;
+  height: 28px;
+  line-height: 28px;
+}
+#indexsel .ui-btn-select.active,#beforePayNoFactory .ui-btn-select.active{
+  border: 1px solid #228feb;
+  border-radius: 5px;
+  padding: 1px 10px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #228feb;
+}
+#indexsel .pay-select div,#beforePayNoFactory .pay-select div{
+  box-flex: 1;
+  -webkit-box-flex: 1;
+  -ms-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-flex: 1;
+  margin: 0 10px;
+  text-align: center;
+  overflow: hidden;
+}
+#indexsel .ui-form-item,
+#afterIndex .ui-form-item {
+  padding: 0 15px;
+}
+#indexsel .ui-form-item input,
+#afterIndex .ui-form-item input {
+  padding-left: 50px;
+}
+#indexsel .ui-form-item .ui-icon-close,
+#afterIndex .ui-form-item .ui-icon-close {
+  right: 5px;
+}
+#indexsel .ui-tips span,#beforePayNoFactory .ui-tips span{
+  vertical-align: top;
+}
+/*--------------------------*/
+
+
+
+
 /*roombind页样式*/
 #roomBind .ui-form-item .ui-select,
 #beforePayNoFactory .ui-form-item .ui-select,
@@ -444,7 +599,7 @@ section.animated{
   line-height: 14px;
   height: 14px;
 }
-
+ 
 /*afterIndexNoBill页样式*/
 #afterIndexNoBill .classroom-info {
   background-color: #228feb;

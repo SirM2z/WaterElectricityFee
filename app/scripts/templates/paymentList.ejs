@@ -54,7 +54,7 @@
         <%total = total + item.PayedAmount;}%>
         <tr>
           <td colspan="2">总计</td>
-          <td><%=total%></td>
+          <td><%=Math.round(total*100)/100 %></td>
         </tr>
         <%}%>
       </tbody>

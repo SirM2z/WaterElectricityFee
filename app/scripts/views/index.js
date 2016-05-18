@@ -18,7 +18,9 @@ App.Views = App.Views || {};
       'click .charge-btn':'paySure',
       'click .ui-icon-close':'clearInput',
       'click .cancle':'canclePay',
-      'click .pay-confirm':'payConfirm'
+      'click .pay-confirm':'payConfirm',
+      'click .success-pay-sure':'surePay',
+      'click .success-pay-history':'surePayHistory'
     },
     
     balanceAmount:null,
@@ -88,12 +90,12 @@ App.Views = App.Views || {};
       // console.log(chargeMoney);
       this.chargeMoney=chargeMoney;
       var str='您确定要为'+App.g.userFlatModel.get('AreaName')+'-'+App.g.userFlatModel.get('FlatName')+'-'+App.g.userFlatModel.get('RoomId')+'充值'+chargeMoney+'元电费吗？'
-      $('.ui-dialog-bd div').text(str);
-      $('.ui-dialog').dialog("show");
+      $('.pay-sure .ui-dialog-bd div').text(str);
+      $('.pay-sure').dialog("show");
     },
     
     canclePay: function(){
-      $('.ui-dialog').dialog("hide");
+      $('.pay-sure').dialog("hide");
     },
     
     payConfirm: function(){
@@ -166,33 +168,37 @@ App.Views = App.Views || {};
               'Authorization': 'bearer ' + App.g.accessToken
             },
             success:function() {
-              var dia = $.dialog({
-                title: '温馨提示',
-                content: '您已成功充值,充值金额将在半小时内到账，请耐心等待',
-                button: ['确认', '查看充值记录']
-              });
-              dia.on('dialog:action', function(e) {
-                Backbone.history.stop();
-                if(e.index === 1){
-                  window.history.pushState(null, null, '#history');
-                }else{
-                  window.history.pushState(null, null, '#index?'+App.g.openId+'&'+App.g.universityId);
-                }
-                Backbone.history.start();
-              });
-              dia.on('dialog:hide', function(e) {});
+              App.loading();
+              $('.success-pay').dialog("show");
             },
             error:function(xhr, ajaxOptions, thrownError){
-              var content = '网络异常，请联系客服人员。';
-              var dia = $.dialog({
-                title: '温馨提示',
-                content:content,
-                button: ['确认']
-              });	
+              App.loading();
+              $.tips({
+                content:'网络异常，请联系客服人员！',
+                stayTime:2000,
+                type:"warn"
+              });
+              Backbone.history.stop();
+              Backbone.history.navigate('#index?'+App.g.openId+'&'+App.g.universityId, {trigger: true});
+              Backbone.history.start();
             }
           });	
         }
       },false);
+    },
+    
+    surePay: function(){
+      $('.success-pay').dialog("hide");
+      Backbone.history.stop();
+      Backbone.history.navigate('#index?'+App.g.openId+'&'+App.g.universityId, {trigger: true});
+      Backbone.history.start();
+    },
+    
+    surePayHistory: function(){
+      $('.success-pay').dialog("hide");
+      Backbone.history.stop();
+      Backbone.history.navigate('#history', {trigger: true});
+      Backbone.history.start();
     }
       
 

@@ -26,18 +26,26 @@ App.Views = App.Views || {};
 
     initialize: function () {
       // this.listenTo(this.model, 'change', this.render);
-      this.$el.off();
-      
-      this.userFlatModel = App.g.userFlatModel.toJSON();
-      this.flatList = App.g.flatList.toJSON();
-      
+      this.$el.off();   
+      App.loading(false);  
+      /*
+      if(App.g.userFlatModel == null)
+      {
+        this.userFlatModel = new App.Models.UserFlatModel();
+      }
+      else
+      {
+         this.userFlatModel =App.g.userFlatModel.toJSON();
+      }*/
+      this.userFlatModel =App.g.userFlatModel.toJSON();
+      this.flatList =App.g.flatList.toJSON();  
       this.render();
     },
 
     render: function () {
-      this.$el.html(this.template({
+      this.$el.html(this.template({       
         userFlatModel:this.userFlatModel,
-        flatList:this.flatList
+        flatList:this.flatList     
       }));
     },
     
@@ -99,16 +107,18 @@ App.Views = App.Views || {};
       }
       
       //保存信息
-      App.loading(true);
+      App.loading(true);     
       App.g.userFlatModel.set({
-        AreaId: livearea.val(),
-        AreaName: $(livearea[0].options[livearea[0].selectedIndex]).text().trim(),
-        FlatId: ban.val(),
-        FlatName: $(ban[0].options[ban[0].selectedIndex]).text().trim(),
-        RoomId: room.val().trim(),
-        StudentIdentity: App.g.studentIdentity,
-        UserName: ''
+          AreaId: livearea.val(),
+          AreaName: $(livearea[0].options[livearea[0].selectedIndex]).text().trim(),
+          FlatId: ban.val(),
+          FlatName: $(ban[0].options[ban[0].selectedIndex]).text().trim(),
+          RoomId: room.val().trim(),
+          StudentIdentity: App.g.studentIdentity,
+          UserName: ''
       });
+     
+     
       App.g.userFlatModel.save(null, {
         success: function(model, response) {
           // console.log(response);

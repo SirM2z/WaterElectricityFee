@@ -9,6 +9,7 @@ App.Routers = App.Routers || {};
     routes: {
       'index?:openId&:universityId': 'init',
       'index': 'index',//&:hqbOpenId&:VenderInterface&:code&:state
+      'indexsel': 'indexsel',//&:hqbOpenId&:VenderInterface&:code&:state
       'beforePayNoFactory': 'beforePayNoFactory',
       'afterIndex': 'afterIndex',
       'afterIndexNoBill': 'afterIndexNoBill',
@@ -119,7 +120,8 @@ App.Routers = App.Routers || {};
         success: function success(response) {
           var result = JSON.parse(response);
           if (result.Status === "SUCCESS") {
-            if (result.Message === 'NOTFOUND') {
+            if (result.Message === 'NOTFOUND') { 
+              App.g.userFlatModel = new App.Models.UserFlatModel();
               Backbone.history.navigate('#roomBind', {trigger: true});
               return;
             }
@@ -131,18 +133,22 @@ App.Routers = App.Routers || {};
               case 0://前付费
                 switch(App.g.venderInterface){
                   case 1://有查询接口 未做
+                    App.g.balanceAmount=result.Data.BalanceAmount;
+                    App.g.balanceMeterReading=result.Data.BalanceMeterReading;
+                    Backbone.history.navigate('#indexsel', {trigger: true});
+                    // _selfthis.indexsel();
                     break;
 
                   case 2://有支付接口
-                    // Backbone.history.navigate('#beforePayNoFactory', {trigger: true});
-                    _selfthis.beforePayNoFactory();
+                     Backbone.history.navigate('#beforePayNoFactory', {trigger: true});
+                    // _selfthis.beforePayNoFactory();
                     break;
 
                   case 3://有查询和支付接口
                     App.g.balanceAmount=result.Data.BalanceAmount;
                     App.g.balanceMeterReading=result.Data.BalanceMeterReading;
-                    // Backbone.history.navigate('#index', {trigger: true});
-                    _selfthis.index();
+                    Backbone.history.navigate('#index', {trigger: true});
+                    // _selfthis.index();
                     break;
                   
                   default:break;
@@ -151,16 +157,16 @@ App.Routers = App.Routers || {};
               case 1://后付费
                 switch(App.g.venderInterface){
                   case 1://有查询接口
-                    // Backbone.history.navigate('#afterNoPay', {trigger: true});
-                    _selfthis.afterNoPay();
+                    Backbone.history.navigate('#afterNoPay', {trigger: true});
+                    // _selfthis.afterNoPay();
                     break;
 
                   case 2://有支付接口 未做
                     break;
 
                   case 3://有查询和支付接口
-                    // Backbone.history.navigate('#afterIndex', {trigger: true});
-                    _selfthis.afterIndex();
+                    Backbone.history.navigate('#afterIndex', {trigger: true});
+                    // _selfthis.afterIndex();
                     break;
 
                   default:break;
@@ -197,6 +203,14 @@ App.Routers = App.Routers || {};
       $('#index').removeClass('hide');
     },
     
+     indexsel: function(){
+      $('.ui-header').addClass('hide');
+      var indexsel = new App.Views.indexsel();
+      $('section').addClass('hide');
+      $('#indexsel').removeClass('hide');
+    },
+    
+    
     beforePayNoFactory: function(){
       $('.ui-header').removeClass('hide');
       $('.ui-header h1').text('水电费充值');
@@ -226,7 +240,7 @@ App.Routers = App.Routers || {};
       $('section').addClass('hide');
       $('#afterNoPay').removeClass('hide');
     },
-    
+   
     roomBind: function(){
       $('.ui-header').removeClass('hide');
       $('.ui-header h1').text('寝室绑定');

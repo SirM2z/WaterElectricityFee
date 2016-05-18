@@ -2,13 +2,14 @@
   <div class="ui-form-item ui-border-b">
     <label>生活区:</label>
     <div class="ui-select">
-      <select class="livearealist-select">
+      <select class="livearealist-select">      
         <% if(!userFlatModel || !userFlatModel.AreaId){ %>
         <option value="0" selected >请选择生活区</option>
         <% } %>
-        <% for(var i=0,ilen=flatList.length;i<ilen;i++){ %>
+        <%for(var i=0,ilen=flatList.length;i<ilen;i++){ %>
+         
         <option value="<%= flatList[i].AreaId %>" 
-        <% if(userFlatModel && userFlatModel.AreaId && flatList[i].AreaId==userFlatModel.AreaId){ %> selected <% } %> >
+        <% if( userFlatModel && userFlatModel.AreaId &&  flatList[i].AreaId==userFlatModel.AreaId){ %> selected <% } %> >
         <%= flatList[i].AreaName %>
         </option>
         <% } %>
@@ -26,7 +27,7 @@
         <% if(flatList[i].AreaId==userFlatModel.AreaId){ %>
         <% for(var j=0,jlen=flatList[i].Flats.length;j<jlen;j++){ %>
         <option value="<%= flatList[i].Flats[j].FlatId %>" data-paymode='<%= flatList[i].Flats[j].PayMode %>' 
-        <% if(userFlatModel && userFlatModel.FlatId && flatList[i].Flats[j].FlatId==userFlatModel.FlatId){ %> selected <% } %> >
+        <% if(userFlatModel && userFlatModel.FlatId &&  flatList[i].Flats[j].FlatId==userFlatModel.FlatId){ %> selected <% } %> > 
         <%= flatList[i].Flats[j].FlatName %>
         </option>
         <% } %>
@@ -37,7 +38,7 @@
   </div>
   <div class="ui-form-item ui-border-b">
     <label>寝&nbsp;&nbsp; &nbsp;室:</label>
-    <input id="room" type="text" placeholder="请输入寝室号" value="<% if(userFlatModel && userFlatModel.RoomId){ %><%=userFlatModel.RoomId %><% } %>" >
+    <input id="room" type="text" placeholder="请输入寝室号" value="<% if(userFlatModel &&  userFlatModel.RoomId){ %><%=userFlatModel.RoomId %><% } %>" >
     <a href="#" class="ui-icon-close"></a>
   </div>
 </div>
