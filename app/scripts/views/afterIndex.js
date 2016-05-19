@@ -116,6 +116,7 @@ App.Views = App.Views || {};
     
     canclePay: function(){
       $('.pay-sure').dialog("hide");
+      App.loading();
     },
     
     payConfirm: function(){
